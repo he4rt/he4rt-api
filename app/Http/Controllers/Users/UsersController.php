@@ -43,7 +43,6 @@ class UsersController extends Controller
     public function index(Request $request){
         $user = new User();
         if($request->has('date')){
-            echo 1;
             $user = User::whereDate('created_at','=',$request->input('date'))->get();
         }else{
             $user = User::paginate(15);
