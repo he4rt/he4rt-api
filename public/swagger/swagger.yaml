@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: 'My first API'
+  contact:
+    email: support@example.com
+  version: 1.0.0
+paths:
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: 'Autenticação de usuário'
+      operationId: AuthLogin
+      parameters:
+        -
+          name: email
+          in: query
+          description: 'E-mail para autenticação'
+          required: true
+          schema:
+            type: string
+        -
+          name: password
+          in: query
+          description: 'Senha para autenticação'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /admin/auth/login:
+    post:
+      tags:
+        - auth
+      summary: 'Autenticação da administração'
+      operationId: AuthAdminLogin
+      parameters:
+        -
+          name: email
+          in: query
+          description: 'E-mail para autenticação'
+          required: true
+          schema:
+            type: string
+        -
+          name: password
+          in: query
+          description: 'Senha para autenticação'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /auth/refresh:
+    post:
+      tags:
+        - auth
+      summary: 'Atualiza o token atual do usuário'
+      operationId: AuthRefresh
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/levelup':
+    post:
+      tags:
+        - users
+      summary: 'Mostra as informações de um usuário'
+      operationId: GetUser
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /users:
+    get:
+      tags:
+        - users
+      summary: 'Lista todos os usuários'
+      operationId: GetUsers
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - users
+      summary: 'Cria um novo usuário'
+      operationId: StoreUser
+      parameters:
+        -
+          name: discord_id
+          in: query
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}':
+    get:
+      tags:
+        - users
+      summary: 'Mostra as informações de um usuário'
+      operationId: GetUser
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...

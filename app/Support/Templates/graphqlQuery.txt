@@ -1,0 +1,45 @@
+<?php
+#parse("PHP File Header.php")
+
+#set($type = "type")
+#set($attributes = "attributes")
+#set($root = "root")
+#set($args = "args")
+#set($context = "context")
+#set($info = "info")
+
+#if (${NAMESPACE})
+
+namespace ${NAMESPACE};
+
+#end
+
+use App\Traits\QueryTrait;
+use Folklore\GraphQL\Support\Query;
+use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
+
+class ${NAME} extends Query{
+
+    use QueryTrait;
+
+    protected \$$type = "Example";
+
+     protected \$$attributes = [
+        'name' => '${NAME}',
+        'description' => 'A query'
+    ];
+
+    public function args()
+    {
+        return [
+            'id' => ['name' => 'id', 'type' => Type::int()],
+        ];
+    }
+    public function resolve(\$$root, \$$args, \$$context, ResolveInfo \$$info)
+    {
+        return [];
+    }
+
+
+}
