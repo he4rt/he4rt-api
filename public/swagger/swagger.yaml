@@ -85,6 +85,14 @@ paths:
         - users
       summary: 'Lista todos os usuários'
       operationId: GetUsers
+      parameters:
+        -
+          name: date
+          in: query
+          description: 'Data para filtrar'
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: ...

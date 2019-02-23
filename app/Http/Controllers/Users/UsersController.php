@@ -24,6 +24,15 @@ class UsersController extends Controller
      *     summary="Lista todos os usuários",
      *     operationId="GetUsers",
      *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="date",
+     *         in="query",
+     *         description="Data para filtrar",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="...",
@@ -32,7 +41,14 @@ class UsersController extends Controller
      */
 
     public function index(Request $request){
-        return $this->success(User::paginate(15));
+        $user = new User();
+        if($request->has('date')){
+            echo 1;
+            $user = User::whereDate('created_at','=',$request->input('date'))->get();
+        }else{
+            $user = User::paginate(15);
+        }
+        return $this->success($user);
     }
 
     /**
