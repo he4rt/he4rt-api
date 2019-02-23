@@ -28,7 +28,7 @@ class UsersController extends Controller
      *         name="date",
      *         in="query",
      *         description="Data para filtrar",
-     *         required=true,
+     *         required=false,
      *         @OA\Schema(
      *           type="string",
      *         )
