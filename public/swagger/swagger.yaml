@@ -62,6 +62,32 @@ paths:
       responses:
         '200':
           description: ...
+  /languages:
+    get:
+      tags:
+        - languages
+      summary: 'Lista todas as linguagens de programação no projeto'
+      operationId: GetLanguages
+      responses:
+        '200':
+          description: ...
+  '/languages/{id}':
+    get:
+      tags:
+        - languages
+      summary: 'Lista todas as linguagens de programação no projeto'
+      operationId: GetLanguages
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID da linguagem'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
   '/users/{discord_id}/levelup':
     post:
       tags:
@@ -73,6 +99,90 @@ paths:
           name: discord_id
           in: path
           description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /tips/development:
+    get:
+      tags:
+        - tips
+      summary: 'Lista todas as dicas armazenadas de desenvolvimento'
+      operationId: GetDevelopmentTips
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - tips
+      summary: 'Cria uma nova dica para o estudo de programação'
+      operationId: StoreDevelopmentTip
+      parameters:
+        -
+          name: tip
+          in: query
+          description: 'Dica que vai rolar'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/tips/development/{id}':
+    delete:
+      tags:
+        - tips
+      summary: 'Deleta uma dica de desenvolvimento'
+      operationId: DeleteDevelopmentTip
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID da dica'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /tips/english:
+    get:
+      tags:
+        - tips
+      summary: 'Lista todas as dicas armazenadas de inglês'
+      operationId: GetEnglishTips
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - tips
+      summary: 'Cria uma nova dica para o estudo de inglês'
+      operationId: StoreEnglishTop
+      parameters:
+        -
+          name: tip
+          in: query
+          description: 'Dica que vai rolar'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/tips/english/{id}':
+    delete:
+      tags:
+        - tips
+      summary: 'Deleta uma dica de desenvolvimento'
+      operationId: DeleteEnglishTip
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID da dica'
           required: true
           schema:
             type: string

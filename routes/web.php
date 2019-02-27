@@ -25,3 +25,16 @@ $router->post('users','Users\\UsersController@store');
 $router->get('users/{discord_id}','Users\\UsersController@show');
 
 $router->post('users/{discord_id}/levelup','Levelup\\LevelupController@store');
+
+
+$router->get('tips/english','Tips\\EnglishController@index');
+$router->get('tips/english/get','Tips\\EnglishController@getTip');
+$router->post('tips/english','Tips\\EnglishController@store');
+$router->delete('tips/english/{id}','Tips\\EnglishController@destroy');
+
+$router->get('tips/development','Tips\\DevelopmentController@index');
+$router->post('tips/development','Tips\\DevelopmentController@store');
+$router->delete('tips/development/{id}','Tips\\DevelopmentController@destroy');
+
+$router->get('languages','Helpers\\LanguageController@index');
+$router->get('languages/{id}','Helpers\\LanguageController@show');
