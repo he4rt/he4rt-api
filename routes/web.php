@@ -23,6 +23,7 @@ $router->post('auth/logout','AuthController@logout');
 $router->get('users','Users\\UsersController@index');
 $router->post('users','Users\\UsersController@store');
 $router->get('users/{discord_id}','Users\\UsersController@show');
+$router->put('users/{discord_id}','Users\\UsersController@update');
 
 $router->post('users/{discord_id}/levelup','Levelup\\LevelupController@store');
 
@@ -38,3 +39,7 @@ $router->delete('tips/development/{id}','Tips\\DevelopmentController@destroy');
 
 $router->get('languages','Helpers\\LanguageController@index');
 $router->get('languages/{id}','Helpers\\LanguageController@show');
+
+$router->get('bans','Helpers\\BanController@index');
+$router->post('bans','Helpers\\BanController@store');
+$router->put('bans/{id}/revoke','Helpers\\BanController@update');
