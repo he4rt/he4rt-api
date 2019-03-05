@@ -46,7 +46,7 @@ class LevelupController extends Controller
             'discord_id' => 'required|exists:users'
         ]);
 
-        $user = User::where('discord_id',$discord_id)->with('levelup')->first();
+        $user = User::where('discord_id',$discord_id)->first();
         $user->current_exp += rand(1,5);
         $user->save();
 
@@ -59,6 +59,6 @@ class LevelupController extends Controller
             $user->is_levelup = false;
         }
 
-        return $this->success($user);
+        return $this->success($user->load('levelup'));
     }
 }

@@ -26,7 +26,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'discord_id',
         'level',
         'current_exp',
-        'money'
+        'money',
+        'git',
+        'name',
+        'nickname',
+        'language'
     ];
 
     /**

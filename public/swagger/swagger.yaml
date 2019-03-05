@@ -276,6 +276,50 @@ paths:
       responses:
         '200':
           description: ...
+    put:
+      tags:
+        - users
+      summary: 'Cria um novo usuário'
+      operationId: StoreUser
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome da pessoa'
+          required: false
+          schema:
+            type: string
+        -
+          name: nickname
+          in: query
+          description: 'Apelido da pessoa'
+          required: false
+          schema:
+            type: string
+        -
+          name: git
+          in: query
+          description: 'Link do git'
+          required: false
+          schema:
+            type: string
+        -
+          name: language
+          in: query
+          description: 'Linguagem em formato ''Locale'''
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
     post:
       tags:
         - users
