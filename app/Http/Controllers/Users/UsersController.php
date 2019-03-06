@@ -114,6 +114,7 @@ class UsersController extends Controller
         return $this->success(User::create(['discord_id' => $request->input('discord_id')]));
     }
 
+
     /**
      * @OA\Put(
      *     path="/users",
@@ -188,5 +189,18 @@ class UsersController extends Controller
         $user->update($fields);
 
         return $this->success($user);
+    }
+
+    public function wipe(Request $request){
+
+        $this->validate($request, [
+            'discord_ids' => 'required|array'
+        ]);
+
+        User::truncate();
+        foreach($request->input('discord_ids') as $id){
+            User::create(['discord_id' => $id]);
+        }
+        return $this->success(['users' => User::count()]);
     }
 }

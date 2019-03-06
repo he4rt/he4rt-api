@@ -22,8 +22,10 @@ $router->post('auth/logout','AuthController@logout');
 
 $router->get('users','Users\\UsersController@index');
 $router->post('users','Users\\UsersController@store');
+$router->post('users/all','Users\\UsersController@storeAll');
 $router->get('users/{discord_id}','Users\\UsersController@show');
 $router->put('users/{discord_id}','Users\\UsersController@update');
+$router->post('users/wipe','Users\\UsersController@wipe');
 
 $router->post('users/{discord_id}/levelup','Levelup\\LevelupController@store');
 

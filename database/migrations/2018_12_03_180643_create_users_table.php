@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('nickname')->nullable();
             $table->string('git')->nullable();
+            $table->text('about')->nullable();
             $table->string('language')->default("pt_BR");
             $table->integer('level')->default(1);
             $table->integer('current_exp')->default(0);
