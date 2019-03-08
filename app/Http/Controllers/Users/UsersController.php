@@ -166,6 +166,15 @@ class UsersController extends Controller
      *           type="string",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="about",
+     *         in="query",
+     *         description="Informações pessoais do usuário",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="...",
@@ -182,6 +191,7 @@ class UsersController extends Controller
             'nickname' => 'string',
             'language' => 'string',
             'git' => 'string',
+            'about' => 'string'
         ]);
 
         $fields = $request->except(['level', 'current_exp', 'money', 'discord_id']);
@@ -196,7 +206,7 @@ class UsersController extends Controller
         $this->validate($request, [
             'discord_ids' => 'required|array'
         ]);
-
+ 
         User::truncate();
         foreach($request->input('discord_ids') as $id){
             User::create(['discord_id' => $id]);

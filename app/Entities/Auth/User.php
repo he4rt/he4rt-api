@@ -30,7 +30,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'git',
         'name',
         'nickname',
-        'language'
+        'language',
+        'about'
     ];
 
     /**

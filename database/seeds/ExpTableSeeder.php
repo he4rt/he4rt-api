@@ -11,7 +11,7 @@ class ExpTableSeeder extends Seeder
      */
     public function run()
     {
-        $exp_table = [10,30,90,360,1000];
+        $exp_table = [10,30,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50];
         Level::truncate();
         foreach($exp_table as $data){
             Level::create(['required_exp' => $data]);
