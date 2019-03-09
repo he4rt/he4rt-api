@@ -26,8 +26,8 @@ $router->post('users/all','Users\\UsersController@storeAll');
 $router->get('users/{discord_id}','Users\\UsersController@show');
 $router->put('users/{discord_id}','Users\\UsersController@update');
 $router->post('users/wipe','Users\\UsersController@wipe');
-
 $router->post('users/{discord_id}/levelup','Levelup\\LevelupController@store');
+$router->get('ranking','Levelup\\RankingController@index');
 
 
 $router->get('tips/english','Tips\\EnglishController@index');
