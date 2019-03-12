@@ -51,7 +51,7 @@ class LevelupController extends Controller
         $user = User::where('discord_id',$discord_id)->first();
         $user->current_exp += rand(1,5);
         $user->save();
-        $user->is_levelup = false;
+
         if($user->level >= Level::count()){
             return $this->success($user);
         }
@@ -60,8 +60,13 @@ class LevelupController extends Controller
             $user->level++;
             $user->save();
             $user->is_levelup = true;
+        }else{
+            $user->is_levelup = false;
         }
 
         return $this->success($user->load('levelup'));
     }
+
+
+
 }

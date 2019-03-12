@@ -117,7 +117,7 @@ class UsersController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/users",
+     *     path="/users/{discord_id}",
      *     summary="Cria um novo usuário",
      *     operationId="StoreUser",
      *     tags={"users"},

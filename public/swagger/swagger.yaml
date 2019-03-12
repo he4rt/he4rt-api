@@ -276,6 +276,39 @@ paths:
       responses:
         '200':
           description: ...
+    post:
+      tags:
+        - users
+      summary: 'Cria um novo usuário'
+      operationId: StoreUser
+      parameters:
+        -
+          name: discord_id
+          in: query
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}':
+    get:
+      tags:
+        - users
+      summary: 'Mostra as informações de um usuário'
+      operationId: GetUser
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
     put:
       tags:
         - users
@@ -317,37 +350,11 @@ paths:
           required: false
           schema:
             type: string
-      responses:
-        '200':
-          description: ...
-    post:
-      tags:
-        - users
-      summary: 'Cria um novo usuário'
-      operationId: StoreUser
-      parameters:
         -
-          name: discord_id
+          name: about
           in: query
-          description: 'ID do usuário do Discord'
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ...
-  '/users/{discord_id}':
-    get:
-      tags:
-        - users
-      summary: 'Mostra as informações de um usuário'
-      operationId: GetUser
-      parameters:
-        -
-          name: discord_id
-          in: path
-          description: 'ID do usuário do Discord'
-          required: true
+          description: 'Informações pessoais do usuário'
+          required: false
           schema:
             type: string
       responses:
