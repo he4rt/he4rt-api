@@ -28,6 +28,8 @@ $router->put('users/{discord_id}','Users\\UsersController@update');
 $router->post('users/wipe','Users\\UsersController@wipe');
 $router->post('users/{discord_id}/levelup','Levelup\\LevelupController@store');
 $router->post('users/{discord_id}/daily', 'Users\\UsersController@daily');
+$router->post('users/{discord_id}/money/add', 'Users\\UsersController@addMoney');
+$router->post('users/{discord_id}/money/reduce', 'Users\\UsersController@reduceMoney');
 $router->get('ranking','Levelup\\RankingController@index');
 
 

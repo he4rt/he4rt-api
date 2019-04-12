@@ -274,4 +274,36 @@ class UsersController extends Controller
 
         return $this->success($user);
     }
+
+    public function addMoney(Request $request, $discord_id)
+    {
+        $request->merge(['discord_id' => $discord_id]);
+        $this->validate($request, [
+            'discord_id' => 'required|exists:users',
+            'value' => 'required'
+        ]);
+
+        $user = User::where('discord_id', $discord_id)->first();
+
+        $user->money += $request->input('value');
+        $user->save();
+
+        return $this->success($user);
+    }
+
+    public function reduceMoney(Request $request, $discord_id)
+    {
+        $request->merge(['discord_id' => $discord_id]);
+        $this->validate($request, [
+            'discord_id' => 'required|exists:users',
+            'value' => 'required'
+        ]);
+
+        $user = User::where('discord_id', $discord_id)->first();
+
+        $user->money -= $request->input('value');
+        $user->save();
+
+        return $this->success($user);
+    }
 }
