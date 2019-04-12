@@ -66,7 +66,4 @@ class LevelupController extends Controller
 
         return $this->success($user->load('levelup'));
     }
-
-
-
 }

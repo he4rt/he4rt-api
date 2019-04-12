@@ -31,7 +31,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'name',
         'nickname',
         'language',
-        'about'
+        'about',
+        'daily'
     ];
 
     /**
@@ -40,6 +41,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = ['password'];
+
+    protected $dates = ['daily'];
 
     public function getJWTIdentifier()
     {

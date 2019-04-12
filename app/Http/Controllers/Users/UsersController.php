@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Users;
 use App\Entities\Auth\User;
 use App\Http\Controllers\Controller;
 use App\Traits\ApiResponse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -201,16 +202,76 @@ class UsersController extends Controller
         return $this->success($user);
     }
 
-    public function wipe(Request $request){
+    public function wipe(Request $request)
+    {
 
         $this->validate($request, [
             'discord_ids' => 'required|array'
         ]);
- 
+
         User::truncate();
-        foreach($request->input('discord_ids') as $id){
+        foreach ($request->input('discord_ids') as $id) {
             User::create(['discord_id' => $id]);
         }
         return $this->success(['users' => User::count()]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/users/{discord_id}/daily",
+     *     summary="Gerador de hCoins diário",
+     *     operationId="Coins",
+     *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="discord_id",
+     *         in="path",
+     *         description="ID do usuário do Discord",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="...",
+     *     )
+     * )
+     */
+    public function daily(Request $request, $discord_id)
+    {
+        $request->merge(['discord_id' => $discord_id]);
+        $this->validate($request, [
+            'discord_id' => 'required|exists:users'
+        ]);
+
+        $user = User::where('discord_id', $request->input('discord_id'))->first();
+
+        if ($user->money != 0) {
+            $check = Carbon::now();
+            $days = $check->diffInDays($user->daily);
+
+            if ($days == 0) {
+                $diff = $check->diff($user->daily);
+
+                $hour = $diff->format("%h");
+                $minutes = $diff->format("%i");
+                $seconds = $diff->format("%s");
+
+                $hour = 23 - $hour;
+                $minutes = 59 - $minutes;
+                $seconds = 59 - $seconds;
+
+                $time = $hour . 'h' . $minutes . 'm' . $seconds . 's';
+
+                return $this->unprocessable(['error_code' => 'already used today',
+                    'time' => $time]);
+            }
+        }
+
+        $user->money = rand(250, 500);
+        $user->daily = Carbon::now();
+        $user->save();
+
+        return $this->success($user);
     }
 }

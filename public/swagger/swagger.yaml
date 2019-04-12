@@ -360,3 +360,20 @@ paths:
       responses:
         '200':
           description: ...
+  '/users/{discord_id}/daily':
+    post:
+      tags:
+        - users
+      summary: 'Gerador de hCoins diário'
+      operationId: Coins
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
