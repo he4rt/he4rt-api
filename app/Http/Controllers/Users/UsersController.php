@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Users;
 
 
 use App\Entities\Auth\User;
+use App\Entities\Coupons\Coupon;
+use App\Entities\Levelup\Level;
 use App\Http\Controllers\Controller;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
@@ -305,5 +307,43 @@ class UsersController extends Controller
         $user->save();
 
         return $this->success($user);
+    }
+
+    public function coupon(Request $request, $discord_id)
+    {
+        $request->merge(['discord_id' => $discord_id]);
+        $this->validate($request, [
+            'discord_id' => 'required|exists:users',
+            'coupon' => 'required|exists:coupons,name'
+        ]);
+
+        $user = User::where('discord_id', $discord_id)->first();
+        $coupon = Coupon::where([
+            [
+                'name', '=' ,$request->input('coupon')
+            ],
+            [
+                'used', '=', false
+            ]
+        ])->orderBy('id', 'DESC')->first();
+
+        if (!$coupon) {
+            return $this->unprocessable(['error' => 'This coupon already is used or not found']);
+        }
+
+        if ($coupon->type_id == 1) {
+            $user->current_exp += $coupon->value;
+
+        } else {
+            $user->money += $coupon->value;
+        }
+
+        $user->save();
+
+        $coupon->used = true;
+        $coupon->user_id = $user->id;
+        $coupon->save();
+
+        return $this->success(['user' => $user, 'coupon' => $coupon]);
     }
 }

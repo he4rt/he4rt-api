@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Entities\Levelup\Level;
+
 class ExpTableSeeder extends Seeder
 {
     /**

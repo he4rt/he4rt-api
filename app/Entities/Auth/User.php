@@ -2,6 +2,7 @@
 
 namespace App\Entities\Auth;
 
+use App\Entities\Coupons\Coupon;
 use App\Entities\Levelup\Level;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -61,5 +62,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function levelup(){
         return $this->hasOne(Level::class,'id','level');
+    }
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
     }
 }

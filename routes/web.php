@@ -30,6 +30,7 @@ $router->post('users/{discord_id}/levelup','Levelup\\LevelupController@store');
 $router->post('users/{discord_id}/daily', 'Users\\UsersController@daily');
 $router->post('users/{discord_id}/money/add', 'Users\\UsersController@addMoney');
 $router->post('users/{discord_id}/money/reduce', 'Users\\UsersController@reduceMoney');
+$router->post('users/{discord_id}/coupon', 'Users\\UsersController@coupon');
 $router->get('ranking','Levelup\\RankingController@index');
 
 
@@ -48,3 +49,5 @@ $router->get('languages/{id}','Helpers\\LanguageController@show');
 $router->get('bans','Helpers\\BanController@index');
 $router->post('bans','Helpers\\BanController@store');
 $router->put('bans/{id}/revoke','Helpers\\BanController@update');
+
+$router->post('coupons', 'Coupon\\CouponController@store');
