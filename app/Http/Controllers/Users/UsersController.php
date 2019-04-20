@@ -282,7 +282,7 @@ class UsersController extends Controller
         $request->merge(['discord_id' => $discord_id]);
         $this->validate($request, [
             'discord_id' => 'required|exists:users',
-            'value' => 'required'
+            'value' => 'required|integer'
         ]);
 
         $user = User::where('discord_id', $discord_id)->first();
@@ -298,7 +298,7 @@ class UsersController extends Controller
         $request->merge(['discord_id' => $discord_id]);
         $this->validate($request, [
             'discord_id' => 'required|exists:users',
-            'value' => 'required'
+            'value' => 'required|integer'
         ]);
 
         $user = User::where('discord_id', $discord_id)->first();
