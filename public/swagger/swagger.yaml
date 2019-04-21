@@ -312,7 +312,7 @@ paths:
     put:
       tags:
         - users
-      summary: 'Cria um novo usuário'
+      summary: 'Altera um usuário'
       operationId: StoreUser
       parameters:
         -

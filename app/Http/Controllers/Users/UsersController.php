@@ -121,7 +121,7 @@ class UsersController extends Controller
     /**
      * @OA\Put(
      *     path="/users/{discord_id}",
-     *     summary="Cria um novo usuário",
+     *     summary="Altera um usuário",
      *     operationId="StoreUser",
      *     tags={"users"},
      *     @OA\Parameter(
@@ -270,11 +270,13 @@ class UsersController extends Controller
             }
         }
 
-        $user->money = rand(250, 500);
+        $daily = rand(250, 500);
+
+        $user->money = $daily;
         $user->daily = Carbon::now();
         $user->save();
 
-        return $this->success($user);
+        return $this->success(['discord_id' => $user->discord_id, 'daily' => $daily]);
     }
 
     public function addMoney(Request $request, $discord_id)
