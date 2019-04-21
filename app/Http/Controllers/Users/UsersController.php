@@ -330,7 +330,7 @@ class UsersController extends Controller
         ])->orderBy('id', 'DESC')->first();
 
         if (!$coupon) {
-            return $this->unprocessable(['error' => 'This coupon already is used or not found']);
+            return $this->unprocessable(['error' => 'This coupon already was used or not found']);
         }
 
         if ($coupon->type_id == 1) {
