@@ -348,4 +348,75 @@ class UsersController extends Controller
 
         return $this->success(['user' => $user, 'coupon' => $coupon]);
     }
+
+
+    /**
+     * @OA\Post(
+     *     path="/users/{discord_id}/reputation",
+     *     summary="Adiciona reputation para um usuário",
+     *     operationId="Reputation",
+     *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="discord_id",
+     *         in="path",
+     *         description="ID do Discord do usuário que está enviando a reputation",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="receive_id",
+     *         in="query",
+     *         description="ID do Discord do usuário que está recebendo a reputation",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="...",
+     *     )
+     * )
+     */
+    public function reputation(Request $request, $discord_id)
+    {
+        $request->merge(['discord_id' => $discord_id]);
+        $this->validate($request, [
+            'discord_id' => 'required|exists:users',
+            'receive_id' => 'required|exists:users,discord_id|different:discord_id'
+        ]);
+
+        $sender = User::where('discord_id', $discord_id)->first();
+        $receiver = User::where('discord_id', $request->input('receive_id'))->first();
+
+        $reputation = $sender->reputation()->orderBy('reputation_logs.created_at', 'DESC')->first();
+
+        if ($reputation) {
+            $check = new Carbon(Carbon::now());
+            $days = $check->diffInDays($reputation->pivot->created_at);
+
+            if ($days == 0) {
+                $diff = $check->diff($reputation->pivot->created_at);
+                $hour = $diff->format("%h");
+                $minutes = $diff->format("%i");
+
+                $hour = 23 - $hour;
+                $minutes = 59 - $minutes;
+
+                $time = $hour . 'h' . $minutes . 'm';
+                return $this->unprocessable(['error_code' => 'already.used.today',
+                    'real_time' => $time]);
+            }
+        }
+
+        $sender->reputation()->attach($receiver->id);
+
+        $receiver->reputation++;
+
+        $receiver->save();
+
+        return $this->success();
+    }
 }

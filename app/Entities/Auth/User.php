@@ -33,7 +33,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'nickname',
         'language',
         'about',
-        'daily'
+        'daily',
+        'reputation'
     ];
 
     /**
@@ -60,12 +61,22 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [];
     }
 
-    public function levelup(){
-        return $this->hasOne(Level::class,'id','level');
+    public function levelup()
+    {
+        return $this->hasOne(Level::class, 'id', 'level');
     }
 
     public function coupon()
     {
         return $this->belongsTo(Coupon::class);
+    }
+
+    public function reputation()
+    {
+        return $this->belongsToMany(User::class,
+            'reputation_logs',
+            'user_id',
+            'receiver_id'
+        )->withTimestamps();
     }
 }

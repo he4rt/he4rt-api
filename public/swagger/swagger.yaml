@@ -377,3 +377,27 @@ paths:
       responses:
         '200':
           description: ...
+  '/users/{discord_id}/reputation':
+    post:
+      tags:
+        - users
+      summary: 'Adiciona reputation para um usuário'
+      operationId: Reputation
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do Discord do usuário que está enviando a reputation'
+          required: true
+          schema:
+            type: string
+        -
+          name: receive_id
+          in: query
+          description: 'ID do Discord do usuário que está recebendo a reputation'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...

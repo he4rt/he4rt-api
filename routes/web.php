@@ -31,8 +31,8 @@ $router->post('users/{discord_id}/daily', 'Users\\UsersController@daily');
 $router->post('users/{discord_id}/money/add', 'Users\\UsersController@addMoney');
 $router->post('users/{discord_id}/money/reduce', 'Users\\UsersController@reduceMoney');
 $router->post('users/{discord_id}/coupon', 'Users\\UsersController@coupon');
+$router->post('users/{discord_id}/reputation', 'Users\\UsersController@reputation');
 $router->get('ranking','Levelup\\RankingController@index');
-
 
 $router->get('tips/english','Tips\\EnglishController@index');
 $router->get('tips/english/get','Tips\\EnglishController@getTip');
