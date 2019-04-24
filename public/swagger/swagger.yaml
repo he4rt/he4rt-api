@@ -175,6 +175,23 @@ paths:
       responses:
         '200':
           description: ...
+  /ranking:
+    get:
+      tags:
+        - ranking
+      summary: 'Lista o raking de usuários'
+      operationId: GetRanking
+      parameters:
+        -
+          name: reputation
+          in: query
+          description: 'Ordenar por reputation (0, 1)'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
   /tips/development:
     get:
       tags:
