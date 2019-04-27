@@ -62,6 +62,30 @@ paths:
       responses:
         '200':
           description: ...
+  /coupons:
+    post:
+      tags:
+        - coupons
+      summary: 'Gera um cupom'
+      operationId: StoreCoupon
+      parameters:
+        -
+          name: value
+          in: query
+          description: 'Valor do cupom'
+          required: true
+          schema:
+            type: string
+        -
+          name: type_id
+          in: query
+          description: 'Tipo do cupom (1-EXP, 2-COIN)'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
   /bans:
     get:
       tags:
@@ -185,7 +209,7 @@ paths:
         -
           name: reputation
           in: query
-          description: 'Ordenar por reputation (0, 1)'
+          description: 'Ordenar por reputation (0 - False, 1 - True)'
           required: false
           schema:
             type: integer
@@ -388,6 +412,81 @@ paths:
           name: discord_id
           in: path
           description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/money/add':
+    post:
+      tags:
+        - users
+        - coins
+      summary: 'Adiciona hCoins para um usuário'
+      operationId: AddCoin
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: value
+          in: query
+          description: 'Valor de hCoins que vai ser adicionado'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/money/reduce':
+    post:
+      tags:
+        - users
+        - coins
+      summary: 'Subtrai hCoins de um usuário'
+      operationId: ReduceCoin
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: value
+          in: query
+          description: 'Valor de hCoins que vai ser subtraído'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/coupon':
+    post:
+      tags:
+        - users
+        - coupons
+      summary: 'Utiliza um cupom para um usuário'
+      operationId: Coupon
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: coupon
+          in: query
+          description: 'Cupom que vai ser utilizado'
           required: true
           schema:
             type: string

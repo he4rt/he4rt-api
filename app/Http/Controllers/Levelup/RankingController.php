@@ -27,7 +27,7 @@ class RankingController extends Controller
      *     @OA\Parameter(
      *         name="reputation",
      *         in="query",
-     *         description="Ordenar por reputation (0, 1)",
+     *         description="Ordenar por reputation (0 - False, 1 - True)",
      *         required=false,
      *         @OA\Schema(
      *           type="integer",

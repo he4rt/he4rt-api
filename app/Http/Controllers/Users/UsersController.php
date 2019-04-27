@@ -279,6 +279,36 @@ class UsersController extends Controller
         return $this->success(['discord_id' => $user->discord_id, 'daily' => $daily]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/users/{discord_id}/money/add",
+     *     summary="Adiciona hCoins para um usuário",
+     *     operationId="AddCoin",
+     *     tags={"users", "coins"},
+     *     @OA\Parameter(
+     *         name="discord_id",
+     *         in="path",
+     *         description="ID do usuário do Discord",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="value",
+     *         in="query",
+     *         description="Valor de hCoins que vai ser adicionado",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="...",
+     *     )
+     * )
+     */
     public function addMoney(Request $request, $discord_id)
     {
         $request->merge(['discord_id' => $discord_id]);
@@ -295,6 +325,36 @@ class UsersController extends Controller
         return $this->success($user);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/users/{discord_id}/money/reduce",
+     *     summary="Subtrai hCoins de um usuário",
+     *     operationId="ReduceCoin",
+     *     tags={"users","coins"},
+     *     @OA\Parameter(
+     *         name="discord_id",
+     *         in="path",
+     *         description="ID do usuário do Discord",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="value",
+     *         in="query",
+     *         description="Valor de hCoins que vai ser subtraído",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="...",
+     *     )
+     * )
+     */
     public function reduceMoney(Request $request, $discord_id)
     {
         $request->merge(['discord_id' => $discord_id]);
@@ -311,6 +371,36 @@ class UsersController extends Controller
         return $this->success($user);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/users/{discord_id}/coupon",
+     *     summary="Utiliza um cupom para um usuário",
+     *     operationId="Coupon",
+     *     tags={"users","coupons"},
+     *     @OA\Parameter(
+     *         name="discord_id",
+     *         in="path",
+     *         description="ID do usuário do Discord",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="coupon",
+     *         in="query",
+     *         description="Cupom que vai ser utilizado",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="...",
+     *     )
+     * )
+     */
     public function coupon(Request $request, $discord_id)
     {
         $request->merge(['discord_id' => $discord_id]);
