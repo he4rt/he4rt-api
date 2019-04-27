@@ -248,7 +248,7 @@ class UsersController extends Controller
 
         $user = User::where('discord_id', $request->input('discord_id'))->first();
 
-        if ($user->money != 0) {
+        if ($user->daily) {
             $check = Carbon::now();
             $days = $check->diffInDays($user->daily);
 
