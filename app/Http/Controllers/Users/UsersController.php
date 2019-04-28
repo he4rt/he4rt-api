@@ -272,7 +272,7 @@ class UsersController extends Controller
 
         $daily = rand(250, 500);
 
-        $user->money = $daily;
+        $user->money += $daily;
         $user->daily = Carbon::now();
         $user->save();
 
