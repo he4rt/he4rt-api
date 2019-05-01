@@ -401,6 +401,22 @@ paths:
       responses:
         '200':
           description: ...
+    delete:
+      tags:
+        - users
+      summary: 'Apaga um usuário'
+      operationId: DeleteUser
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
   '/users/{discord_id}/daily':
     post:
       tags:

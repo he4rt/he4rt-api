@@ -204,6 +204,32 @@ class UsersController extends Controller
         return $this->success($user);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/users/{discord_id}",
+     *     summary="Apaga um usuário",
+     *     operationId="DeleteUser",
+     *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="discord_id",
+     *         in="path",
+     *         description="ID do usuário do Discord",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="...",
+     *     )
+     * )
+     */
+    public function destroy(int $discord_id)
+    {
+        return $this->success(User::where('discord_id', $discord_id)->delete());
+    }
+
     public function wipe(Request $request)
     {
 
