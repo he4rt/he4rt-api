@@ -281,13 +281,9 @@ class UsersController extends Controller
             if ($days == 0) {
                 $diff = $check->diff($user->daily);
 
-                $hour = $diff->format("%h");
-                $minutes = $diff->format("%i");
-                $seconds = $diff->format("%s");
-
-                $hour = 23 - $hour;
-                $minutes = 59 - $minutes;
-                $seconds = 59 - $seconds;
+                $hour = 23 - $diff->format("%h");
+                $minutes = 59 - $diff->format("%i");
+                $seconds = 59 - $diff->format("%s");
 
                 $time = $hour . 'h' . $minutes . 'm' . $seconds . 's';
 
@@ -515,13 +511,12 @@ class UsersController extends Controller
 
             if ($days == 0) {
                 $diff = $check->diff($reputation->pivot->created_at);
-                $hour = $diff->format("%h");
-                $minutes = $diff->format("%i");
 
-                $hour = 23 - $hour;
-                $minutes = 59 - $minutes;
+                $hour = 23 - $diff->format("%h");
+                $minutes = 59 - $diff->format("%i");
+                $seconds = 59 - $diff->format("%s");
 
-                $time = $hour . 'h' . $minutes . 'm';
+                $time = $hour . 'h' . $minutes . 'm' . $seconds . 's';
                 return $this->unprocessable(['error_code' => 'already.used.today',
                     'real_time' => $time]);
             }
