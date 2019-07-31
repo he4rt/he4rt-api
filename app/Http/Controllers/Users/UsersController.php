@@ -192,6 +192,7 @@ class UsersController extends Controller
             'discord_id' => 'required|exists:users',
             'name' => 'string',
             'nickname' => 'string',
+            'twitch' => 'string',
             'language' => 'string',
             'git' => 'string',
             'about' => 'string'

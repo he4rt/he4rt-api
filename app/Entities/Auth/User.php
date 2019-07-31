@@ -34,7 +34,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'language',
         'about',
         'daily',
-        'reputation'
+        'reputation',
+        'twitch'
     ];
 
     /**
