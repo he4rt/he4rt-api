@@ -314,6 +314,13 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: twitch
+          in: query
+          description: 'Nick da Twitch'
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: ...
@@ -395,6 +402,13 @@ paths:
           name: about
           in: query
           description: 'Informações pessoais do usuário'
+          required: false
+          schema:
+            type: string
+        -
+          name: twitch
+          in: query
+          description: 'Nickname da twitch do usuário'
           required: false
           schema:
             type: string

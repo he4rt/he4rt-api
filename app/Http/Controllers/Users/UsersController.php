@@ -36,6 +36,15 @@ class UsersController extends Controller
      *           type="string",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="twitch",
+     *         in="query",
+     *         description="Nick da Twitch",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="...",
@@ -48,6 +57,8 @@ class UsersController extends Controller
         $user = new User();
         if ($request->has('date')) {
             $user = User::whereDate('created_at', '=', $request->input('date'))->get();
+        } elseif ($request->has('twitch')) {
+            $user = User::where('twitch', '=', $request->input('twitch'))->first();
         } else {
             $user = User::paginate(15);
         }
@@ -173,6 +184,15 @@ class UsersController extends Controller
      *         name="about",
      *         in="query",
      *         description="Informações pessoais do usuário",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="twitch",
+     *         in="query",
+     *         description="Nickname da twitch do usuário",
      *         required=false,
      *         @OA\Schema(
      *           type="string",
