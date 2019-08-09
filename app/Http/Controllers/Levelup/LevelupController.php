@@ -22,8 +22,8 @@ class LevelupController extends Controller
     /**
      * @OA\Post(
      *     path="/users/{discord_id}/levelup",
-     *     summary="Mostra as informações de um usuário",
-     *     operationId="GetUser",
+     *     summary="Dá exp para um usuário",
+     *     operationId="PostUserXp",
      *     tags={"users"},
      *     @OA\Parameter(
      *         name="discord_id",
