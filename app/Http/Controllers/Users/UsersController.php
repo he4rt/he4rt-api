@@ -28,6 +28,15 @@ class UsersController extends Controller
      *     operationId="GetUsers",
      *     tags={"users"},
      *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="date",
      *         in="query",
      *         description="Data para filtrar",
@@ -72,6 +81,15 @@ class UsersController extends Controller
      *     operationId="GetUser",
      *     tags={"users"},
      *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="discord_id",
      *         in="path",
      *         description="ID do usuário do Discord",
@@ -104,6 +122,15 @@ class UsersController extends Controller
      *     operationId="StoreUser",
      *     tags={"users"},
      *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="discord_id",
      *         in="query",
      *         description="ID do usuário do Discord",
@@ -135,6 +162,15 @@ class UsersController extends Controller
      *     summary="Altera um usuário",
      *     operationId="StoreUser",
      *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="discord_id",
      *         in="path",
@@ -232,6 +268,15 @@ class UsersController extends Controller
      *     operationId="DeleteUser",
      *     tags={"users"},
      *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="discord_id",
      *         in="path",
      *         description="ID do usuário do Discord",
@@ -271,6 +316,15 @@ class UsersController extends Controller
      *     summary="Gerador de hCoins diário",
      *     operationId="Coins",
      *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="discord_id",
      *         in="path",
@@ -313,7 +367,11 @@ class UsersController extends Controller
             }
         }
 
-        $daily = rand(250, 500);
+        if ($request->input('donator')) {
+            $daily = rand(300, 1000) * 2;
+        } else {
+            $daily = rand(250, 500);
+        }
 
         $user->money += $daily;
         $user->daily = Carbon::now();
@@ -489,6 +547,15 @@ class UsersController extends Controller
      *     summary="Adiciona reputation para um usuário",
      *     operationId="Reputation",
      *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="discord_id",
      *         in="path",

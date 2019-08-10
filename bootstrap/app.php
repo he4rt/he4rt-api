@@ -70,6 +70,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'api_key' => App\Http\Middleware\Header::class
 ]);
 
 /*

@@ -70,6 +70,13 @@ paths:
       operationId: StoreCoupon
       parameters:
         -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
           name: value
           in: query
           description: 'Valor do cupom'
@@ -190,6 +197,13 @@ paths:
       operationId: PostUserXp
       parameters:
         -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
           name: discord_id
           in: path
           description: 'ID do usuário do Discord'
@@ -308,6 +322,13 @@ paths:
       operationId: GetUsers
       parameters:
         -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
           name: date
           in: query
           description: 'Data para filtrar'
@@ -331,6 +352,13 @@ paths:
       operationId: StoreUser
       parameters:
         -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
           name: discord_id
           in: query
           description: 'ID do usuário do Discord'
@@ -348,6 +376,13 @@ paths:
       operationId: GetUser
       parameters:
         -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
           name: discord_id
           in: path
           description: 'ID do usuário do Discord'
@@ -363,6 +398,13 @@ paths:
       summary: 'Altera um usuário'
       operationId: StoreUser
       parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
         -
           name: discord_id
           in: path
@@ -422,6 +464,13 @@ paths:
       operationId: DeleteUser
       parameters:
         -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
           name: discord_id
           in: path
           description: 'ID do usuário do Discord'
@@ -438,6 +487,13 @@ paths:
       summary: 'Gerador de hCoins diário'
       operationId: Coins
       parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
         -
           name: discord_id
           in: path
@@ -530,6 +586,13 @@ paths:
       summary: 'Adiciona reputation para um usuário'
       operationId: Reputation
       parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
         -
           name: discord_id
           in: path

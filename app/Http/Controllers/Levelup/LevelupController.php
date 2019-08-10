@@ -26,6 +26,15 @@ class LevelupController extends Controller
      *     operationId="PostUserXp",
      *     tags={"users"},
      *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="discord_id",
      *         in="path",
      *         description="ID do usuário do Discord",
@@ -49,7 +58,11 @@ class LevelupController extends Controller
         ]);
 
         $user = User::where('discord_id',$discord_id)->first();
-        $user->current_exp += rand(1,5);
+
+        $xp = rand(1,5);
+        $xp *= $request->input('donator') ? 2 : 1;
+
+        $user->current_exp += $xp;
         $user->save();
 
         if($user->level >= Level::count()){

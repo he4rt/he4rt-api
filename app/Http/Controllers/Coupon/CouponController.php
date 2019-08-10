@@ -20,6 +20,15 @@ class CouponController extends Controller
      *     operationId="StoreCoupon",
      *     tags={"coupons"},
      *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="value",
      *         in="query",
      *         description="Valor do cupom",
