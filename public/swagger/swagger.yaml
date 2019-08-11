@@ -62,6 +62,307 @@ paths:
       responses:
         '200':
           description: ...
+  /categories:
+    get:
+      tags:
+        - categories
+      summary: 'Lista todas as categorias'
+      operationId: GetCategories
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: includes
+          in: query
+          description: 'Faz o include das relações'
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - categories
+      summary: 'Cria uma categoria'
+      operationId: PostCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome da categoria'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/categories/{id}':
+    get:
+      tags:
+        - categories
+      summary: 'Lista uma categoria'
+      operationId: GetCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    put:
+      tags:
+        - categories
+      summary: 'Atualiza uma categoria'
+      operationId: PutCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome da categoria'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    delete:
+      tags:
+        - categories
+      summary: 'Apaga uma categoria'
+      operationId: DeleteCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /products:
+    get:
+      tags:
+        - products
+      summary: 'Lista todas os produtos'
+      operationId: GetProducts
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: category_id
+          in: query
+          description: 'ID da categoria'
+          required: false
+          schema:
+            type: string
+        -
+          name: includes
+          in: query
+          description: 'Faz o include das relações'
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - products
+      summary: 'Cria um produto'
+      operationId: PostProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: description
+          in: query
+          description: 'Descrição do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: price
+          in: query
+          description: 'Preço do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: category_id
+          in: query
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  '/products/{id}':
+    get:
+      tags:
+        - products
+      summary: 'Lista um produto'
+      operationId: GetProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    put:
+      tags:
+        - products
+      summary: 'Atualiza um produto'
+      operationId: PutProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: description
+          in: query
+          description: 'Descrição do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: price
+          in: query
+          description: 'Preço do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: category_id
+          in: query
+          description: 'ID da categoria'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+    delete:
+      tags:
+        - products
+      summary: 'Apaga um produto'
+      operationId: DeleteProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
   /coupons:
     post:
       tags:

@@ -54,4 +54,16 @@ $router->group(['middleware' => 'api_key'], function($router){
     $router->put('bans/{id}/revoke','Helpers\\BanController@update');
 
     $router->post('coupons', 'Coupon\\CouponController@store');
+
+    $router->get('/categories', 'Category\\CategoryController@index');
+    $router->post('/categories', 'Category\\CategoryController@store');
+    $router->get('/categories/{id}', 'Category\\CategoryController@show');
+    $router->put('/categories/{id}', 'Category\\CategoryController@update');
+    $router->delete('/categories/{id}', 'Category\\CategoryController@destroy');
+
+    $router->get('/products', 'Category\\Product\\ProductController@index');
+    $router->post('/products', 'Category\\Product\\ProductController@store');
+    $router->get('/products/{id}', 'Category\\Product\\ProductController@show');
+    $router->put('/products/{id}', 'Category\\Product\\ProductController@update');
+    $router->delete('/products/{id}', 'Category\\Product\\ProductController@destroy');
 });

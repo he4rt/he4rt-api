@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FieldManager;
+namespace App\FieldManagers;
 
 abstract class FieldManager
 {
