@@ -2,6 +2,7 @@
 
 namespace App\Entities\Auth;
 
+use App\Entities\Category\Product\Product;
 use App\Entities\Coupons\Coupon;
 use App\Entities\Levelup\Level;
 use Illuminate\Auth\Authenticatable;
@@ -78,6 +79,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'reputation_logs',
             'user_id',
             'receiver_id'
+        )->withTimestamps();
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class,
+            'user_products',
+            'user_id',
+            'product_id'
         )->withTimestamps();
     }
 }

@@ -531,6 +531,37 @@ paths:
       responses:
         '200':
           description: ...
+  '/store/{product_id}':
+    post:
+      tags:
+        - store
+      summary: 'Realiza a compra de um produto'
+      operationId: PostStore
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: product_id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: query
+          description: 'ID do usuário do DIscord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
   /tips/development:
     get:
       tags:
@@ -905,6 +936,30 @@ paths:
           name: receive_id
           in: query
           description: 'ID do Discord do usuário que está recebendo a reputation'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/products':
+    get:
+      tags:
+        - users
+      summary: 'Lista todos os produtos comprados pelo usuário'
+      operationId: GetUserProducts
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
           required: true
           schema:
             type: string
