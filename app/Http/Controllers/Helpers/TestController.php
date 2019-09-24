@@ -16,7 +16,6 @@ class TestController extends ApiController
 {
     public function testFunction(){
 
-        header('Content-Type: image/png');
         $charService = new CharacterService();
 
         $cap = $mask = $eyes = $ears = $coat = $pants = $glove = $cape = $shoes = $shield = $weapon = null;
