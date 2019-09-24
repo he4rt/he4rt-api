@@ -13,6 +13,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Log;
+
 class CharacterService extends \DOMDocument
 {
 
@@ -20,6 +22,12 @@ class CharacterService extends \DOMDocument
     const mainX = 44;
     const mainY = 34;
     const neckY = 65;
+
+    public $mainDirectory;
+
+    public $image;
+    public $vSlot;
+    public $stand;
 
     //Default Gender Clothes
     public $default = array(
@@ -34,6 +42,8 @@ class CharacterService extends \DOMDocument
         header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + 86400));
         header('Content-Type: image/png');
         $this->image = ImageCreateTrueColor(96, 96);
+        $this->mainDirectory = storage_path('app/assets/images/');
+
         ImageSaveAlpha($this->image, true);
         ImageFill($this->image, 0, 0, ImageColorAllocateAlpha($this->image, 0, 0, 0, 127));
     }
@@ -49,14 +59,16 @@ class CharacterService extends \DOMDocument
             }
             $this->$key = array(
                 "ID" => $value,
-                "xml" => self::XMLoader($key . "/0" . $value . ".img/")
+                "xml" => self::XMLoader($this->mainDirectory . $key . "/0" . $value . ".img/")
             );
+
         }
+
     }
 
     public function setWepInfo($weapon)
     {
-        $Location = "Weapon/0" . $weapon . ".img/";
+        $Location = $this->mainDirectory . "Weapon/0" . $weapon . ".img/";
         if (self::exists($Location . "coord.xml")) {
             $xml = self::XMLoader($Location);
             switch ($weapon) {
@@ -76,7 +88,7 @@ class CharacterService extends \DOMDocument
                 $faceX = self::mainX + $this->Face['xml']->_face->x;
                 $faceY = self::mainY + $this->Face['xml']->_face->y;
 
-                self::useImage("Face/0" . $this->Face['ID'] . ".img/default.face.png", $faceX, $faceY);
+                self::useImage($this->mainDirectory . "Face/0".$this->Face["ID"] . ".img/default.face.png", $faceX, $faceY);
             }
         }
     }
@@ -121,8 +133,8 @@ class CharacterService extends \DOMDocument
 
         if (isset($this->Hair['ID'])) {
             $hair = "_" . $z;
-            $hairX = self::mainX + $this->Hair['xml']->$hair->_stand1->x;
-            $hairY = self::mainY + $this->Hair['xml']->$hair->_stand1->y;
+            $hairX = self::mainX + $this->Hair['xml']->_hair->_stand1->x;
+            $hairY = self::mainY + $this->Hair['xml']->_hair->_stand1->y;
             $vSlotArray = str_split($this->vSlot, 2);
 
             switch ($z) {
@@ -136,7 +148,7 @@ class CharacterService extends \DOMDocument
                             if ($this->Hair['xml']->$hair->_stand1->z == $z) {
                                 $hairX = self::mainX + $this->Hair['xml']->$hair->_stand1->x;
                                 $hairY = self::mainY + $this->Hair['xml']->$hair->_stand1->y;
-                                self::useImage("Hair/0" . $this->Hair['ID'] . ".img/default." . $z . ".png", $hairX, $hairY);
+                                self::useImage($this->mainDirectory . "Hair/0" . $this->Hair['ID'] . ".img/default." . $z . ".png", $hairX, $hairY);
                             }
                         }
                     }
@@ -239,37 +251,26 @@ class CharacterService extends \DOMDocument
             "backWing" => array("cape"),
             "capeBelowBody" => array("cape", "capeOverArm"),
             "capOverHair" => array("cape"),
-            "capeOverHead" => array("cape", "capeArm", "capeOverHead", "cape3")
+            "capeOverHead" => array("cape", "capeArm", "capeOverHead", "cape3"),
+            "capeArm" => array()
         );
+
 
         if (isset($this->Cape['xml'])) {
             foreach ($zArray[$z] as $type) {
                 $cape = "_" . $type;
-
                 if (property_exists($this->Cape['xml'], $cape)) {
                     if ($this->Cape['xml']->$cape->stand1->z == $z) {
                         $capeX = self::mainX + $this->Cape['xml']->$cape->stand1->x;
                         $capeY = self::neckY + $this->Cape['xml']->$cape->stand1->y;
-                        self::useImage("Cape/0" . $this->Cape['ID'] . ".img/stand1.0." . $type . ".png", $capeX, $capeY);
+                        self::useImage($this->mainDirectory . "Cape/0" . $this->Cape['ID'] . ".img/stand1.0." . $type . ".png", $capeX, $capeY);
                     }
                 }
             }
         }
     }
 
-    public function setShield($z = NULL)
-    {
-        if ($this->Shield['ID'] < 1090000) {
-            self::setWeapon("weaponOverArmBelowHead");
-        } else if ($this->Shield['ID'] > 1340000 && $this->Shield['ID'] < 1360000) { // Secondary weapon
-            // not handle secondary weaps by this way anymore
-        } else if (isset($this->Shield['xml']) && $z == null) {
-            $shieldX = self::mainX + $this->Shield['xml']->_shield->stand1->x;
-            $shieldY = self::neckY + $this->Shield['xml']->_shield->stand1->y;
 
-            self::useImage("Shield/0" . $this->Shield['ID'] . ".img/stand1.0.shield.png", $shieldX, $shieldY);
-        }
-    }
 
     public function setShoes($z)
     {
@@ -290,7 +291,7 @@ class CharacterService extends \DOMDocument
                     if ($this->Shoes['xml']->$shoes->_stand1->z == $z) {
                         $shoesX = self::mainX + $this->Shoes['xml']->$shoes->_stand1->x;
                         $shoesY = self::neckY + $this->Shoes['xml']->$shoes->_stand1->y;
-                        self::useImage("Shoes/0" . $this->Shoes['ID'] . ".img/stand1.0." . $type . ".png", $shoesX, $shoesY);
+                        self::useImage($this->mainDirectory . "Shoes/0" . $this->Shoes['ID'] . ".img/stand1.0." . $type . ".png", $shoesX, $shoesY);
                     }
                 }
             }
@@ -323,7 +324,7 @@ class CharacterService extends \DOMDocument
     public function setPants()
     {
         if (!isset($this->Pants['ID'])) {
-            self::useImage("Pants/0{$this->default[$this->Gender['ID']]['pants']}.img/stand1.0.pants.png", self::mainX - 3, self::neckY + 1);
+            self::useImage($this->mainDirectory . "Pants/0{$this->default[$this->Gender['ID']]['pants']}.img/stand1.0.pants.png", self::mainX - 3, self::neckY + 1);
         } elseif ($this->Coat['ID'] >= 1050000) {
             return NULL;
         } elseif (isset($this->Pants['xml'])) {
@@ -340,106 +341,60 @@ class CharacterService extends \DOMDocument
 
     public function setCoat($type)
     {
-        $Location = ($this->Coat['ID'] >= 1050000 ? "Longcoat" : "Coat") . "/0" . $this->Coat['ID'] . ".img/";
+        $Location = $this->mainDirectory . ($this->Coat['ID'] >= 1050000 ? "Longcoat" : "Coat") . "/0" . $this->Coat['ID'] . ".img/";
         if (!isset($this->Coat['ID'])) {
-            self::useImage("Coat/0{$this->default[$this->Gender['ID']]['coat']}.img/stand1.0.mail.png", self::mainX - 3, self::neckY - 9);
+            self::useImage($this->mainDirectory . "Coat/0{$this->default[$this->Gender['ID']]['coat']}.img/stand1.0.mail.png", self::mainX - 3, self::neckY - 9);
         } elseif (self::exists($Location . "coord.xml")) {
             $xml = self::XMLoader($Location);
             $snd = "stand" . $this->stand;
 
             switch ($type) {
                 case "mail":
-                    $mailX = self::mainX + $xml->_mail->$snd->x;
-                    $mailY = self::neckY + $xml->_mail->$snd->y;
+                    $mailX = self::mainX + $xml->_mail->stand1->x;
+                    $mailY = self::neckY + $xml->_mail->stand1->y;
 
-                    if (self::exists($Location . "stand2.0.mail.png") && $this->stand == 2)
-                        self::useImage($Location . "stand2.0.mail.png", $mailX, $mailY);
-                    else
-                        self::useImage($Location . "stand1.0.mail.png", $mailX, $mailY);
+
+                    self::useImage($Location . "stand1.0.mail.png", $mailX , $mailY);
                     break;
                 case "mailArm":
-                    $mailArmX = self::mainX + $xml->_mailArm->$snd->x;
-                    $mailArmY = self::neckY + $xml->_mailArm->$snd->y;
+                    $mailArmX = self::mainX + $xml->_mailArm->stand1->x;
+                    $mailArmY = self::neckY + $xml->_mailArm->stand1->y;
 
-                    self::useImage($Location . "stand" . $this->stand . ".0.mailArm.png", $mailArmX, $mailArmY);
+                    self::useImage($Location . "stand1.0.mailArm.png", $mailArmX, $mailArmY);
                     break;
             }
         }
     }
 
-    public function setWeapon($z)
-    {
-        $wepArray = array( // Updated
-            "weapon" => array("weapon", "effect", "weaponFront"),
-            "weaponBelowArm" => array("weapon", "weaponBelowArm", "ex"),
-            "weaponBelowBody" => array("weapon", "weaponBelowBody"),
-            "weaponOverArm" => array("weapon", "weaponOverArm", "string", "weaponOverGlove", "weaponOverGlve"),
-            "weaponOverArmBelowHead" => array("weapon", "weaponL"),
-            "weaponOverBody" => array("weapon", "weaponOverBody", "weaponL"),
-            "weaponOverGlove" => array("weapon", "belt"),
-            "weaponOverHand" => array("weapon", "weaponOverHand"),
-            "weaponWristOverGlove" => array("weapon", "weaponWrist"),
-            "armBelowHeadOverMailChest" => array("weapon"),
-            "gloveWristBelowWeapon" => array("weapon"),
-            "weaponOverGloveBelowMailArm" => array("weapon"),
-            "backWeapon" => array("weapon"),
-            "handBelowWeapon" => array("weaponL"),
-            "characterEnd" => array("effect"),
-            "emotionOverBody" => array("effect"),
-        );
-        if ($z == "weaponOverArmBelowHead" && ($this->Shield['ID'] > 1340000 && $this->Shield['ID'] < 1350000)) { //Katara, Dualbow
-            $Location = "Weapon/0" . $this->Shield['ID'] . ".img/";
-            if (self::exists($Location . "coord.xml")) {
-                $xml = self::XMLoader($Location);
-                $snd = "_stand" . $xml->_info->stand->value;
-                $ss = "stand" . $xml->_info->stand->value; // I'm okay with this 'cause too lazy to recreate the whole GD folder to fix this.
-                $shieldX = self::mainX + $xml->_weapon->$snd->x;
-                $shieldY = self::neckY + $xml->_weapon->$snd->y;
-                self::useImage("Weapon/0" . $this->Shield['ID'] . ".img/" . $ss . ".0.weapon.png", $shieldX, $shieldY);
-            }
-        } else if (isset($this->Weapon['xml'])) {
-            $snd = "_stand" . $this->stand;
-            $ss = "stand" . $this->stand; // I'm okay with this 'cause too lazy to recreate the whole GD folder to fix this.
-            if ($wepNUM = $this->Weapon['xml']->_info->$ss->NUM)
-                $wepNUM .= ".";
-            foreach ($wepArray[$z] as $type) {
-                $weap = "_" . $type;
-                if (property_exists($this->Weapon['xml'], $weap)) {
-                    if ($this->Weapon['xml']->$weap->$snd->z == $z) {
-                        $wepX = self::mainX + $this->Weapon['xml']->$weap->$snd->x;
-                        $wepY = self::neckY + $this->Weapon['xml']->$weap->$snd->y;
-                        self::useImage("Weapon/0" . $this->Weapon['ID'] . ".img/" . $wepNUM . $ss . ".0." . $type . ".png", $wepX, $wepY);
-                    }
-                }
-            }
-        }
-    }
+
 
     public function createBody($type)
     {
         $skin = 2000 + $this->Skin['ID'];
         switch ($type) {
             case "head":
-                self::useImage("Skin/0000" . $skin . ".img/front.head.png", self::mainX - 15, self::mainY - 12);
+                self::useImage($this->mainDirectory . "Skin/0000" . $skin . ".img/front.head.png", self::mainX - 15, self::mainY - 12);
                 break;
             case "body":
-                self::useImage("Skin/0000" . $skin . ".img/stand{$this->stand}.0.body.png", (self::mainX + $this->stand) - 9, self::mainY + 21);
+                self::useImage($this->mainDirectory . "Skin/0000" . $skin . ".img/stand1.0.body.png", (self::mainX + $this->stand) - 9, self::mainY + 21);
                 break;
             case "arm":
-                self::useImage("Skin/0000" . $skin . ".img/stand{$this->stand}.0.arm.png", self::mainX + ($this->stand == 2 ? 4 : 8), self::mainY + 23);
+                self::useImage($this->mainDirectory . "Skin/0000" . $skin . ".img/stand1.0.arm.png", self::mainX + ($this->stand == 2 ? 4 : 8), self::mainY + 23);
                 break;
             case "hand":
                 if ($this->stand == 2)
-                    self::useImage("Skin/0000" . $skin . ".img/stand2.0.hand.png", self::mainX - 10, self::mainY + 26);
+                    self::useImage($this->mainDirectory . "Skin/0000" . $skin . ".img/stand1.0.hand.png", self::mainX - 10, self::mainY + 26);
                 break;
         }
     }
 
     public function charType($type, $name)
     {
+
         switch ($type) {
             case 'create':
-                ImagePNG($this->image, "Characters/" . $name . ".png");
+                ImagePNG($this->image, $this->mainDirectory . "Characters/" . $name . ".png");
+
                 break;
             case 'use':
                 self::useImage("Characters/" . $name . ".png");

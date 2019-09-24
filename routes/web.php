@@ -15,6 +15,8 @@ $router->get('/', function () use ($router) {
     return response("Servidor online!");
 });
 
+$router->get('/test','Helpers\\TestController@testFunction');
+
 $router->group(['middleware' => 'api_key'], function($router){
     $router->post('auth/login','AuthController@loginPortal');
     $router->post('admin/auth/login','AuthController@loginAdmin');
