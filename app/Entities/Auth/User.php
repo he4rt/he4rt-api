@@ -2,6 +2,8 @@
 
 namespace App\Entities\Auth;
 
+use App\Entities\Category\Product\Product;
+use App\Entities\Coupons\Coupon;
 use App\Entities\Levelup\Level;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,7 +28,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'discord_id',
         'level',
         'current_exp',
-        'money'
+        'money',
+        'git',
+        'name',
+        'nickname',
+        'language',
+        'about',
+        'daily',
+        'reputation',
+        'twitch'
     ];
 
     /**
@@ -35,6 +45,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = ['password'];
+
+    protected $dates = ['daily'];
 
     public function getJWTIdentifier()
     {
@@ -51,7 +63,31 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [];
     }
 
-    public function levelup(){
-        return $this->hasOne(Level::class,'id','level');
+    public function levelup()
+    {
+        return $this->hasOne(Level::class, 'id', 'level');
+    }
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
+    }
+
+    public function reputation()
+    {
+        return $this->belongsToMany(User::class,
+            'reputation_logs',
+            'user_id',
+            'receiver_id'
+        )->withTimestamps();
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class,
+            'user_products',
+            'user_id',
+            'product_id'
+        )->withTimestamps();
     }
 }

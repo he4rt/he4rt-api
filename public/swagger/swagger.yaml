@@ -62,17 +62,584 @@ paths:
       responses:
         '200':
           description: ...
+  /categories:
+    get:
+      tags:
+        - categories
+      summary: 'Lista todas as categorias'
+      operationId: GetCategories
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: includes
+          in: query
+          description: 'Faz o include das relações'
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - categories
+      summary: 'Cria uma categoria'
+      operationId: PostCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome da categoria'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/categories/{id}':
+    get:
+      tags:
+        - categories
+      summary: 'Lista uma categoria'
+      operationId: GetCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    put:
+      tags:
+        - categories
+      summary: 'Atualiza uma categoria'
+      operationId: PutCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome da categoria'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    delete:
+      tags:
+        - categories
+      summary: 'Apaga uma categoria'
+      operationId: DeleteCategory
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /products:
+    get:
+      tags:
+        - products
+      summary: 'Lista todas os produtos'
+      operationId: GetProducts
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: category_id
+          in: query
+          description: 'ID da categoria'
+          required: false
+          schema:
+            type: string
+        -
+          name: includes
+          in: query
+          description: 'Faz o include das relações'
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - products
+      summary: 'Cria um produto'
+      operationId: PostProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: description
+          in: query
+          description: 'Descrição do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: price
+          in: query
+          description: 'Preço do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: category_id
+          in: query
+          description: 'ID da categoria'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  '/products/{id}':
+    get:
+      tags:
+        - products
+      summary: 'Lista um produto'
+      operationId: GetProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    put:
+      tags:
+        - products
+      summary: 'Atualiza um produto'
+      operationId: PutProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: description
+          in: query
+          description: 'Descrição do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: price
+          in: query
+          description: 'Preço do produto'
+          required: false
+          schema:
+            type: string
+        -
+          name: category_id
+          in: query
+          description: 'ID da categoria'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+    delete:
+      tags:
+        - products
+      summary: 'Apaga um produto'
+      operationId: DeleteProduct
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /coupons:
+    post:
+      tags:
+        - coupons
+      summary: 'Gera um cupom'
+      operationId: StoreCoupon
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: value
+          in: query
+          description: 'Valor do cupom'
+          required: true
+          schema:
+            type: string
+        -
+          name: type_id
+          in: query
+          description: 'Tipo do cupom (1-EXP, 2-COIN)'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  /bans:
+    get:
+      tags:
+        - bans
+      summary: 'Lista todos os bans até o momento'
+      operationId: GetBanList
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - bans
+      summary: 'Cria um novo ban'
+      operationId: StoreBan
+      parameters:
+        -
+          name: admin_id
+          in: query
+          description: 'ID de quem deu o ban'
+          required: true
+          schema:
+            type: string
+        -
+          name: victim_id
+          in: query
+          description: 'ID de quem recebeu o ban'
+          required: true
+          schema:
+            type: string
+        -
+          name: type
+          in: query
+          description: 'Tipo de ban (ban/mute/kick)'
+          required: true
+          schema:
+            type: string
+        -
+          name: reason
+          in: query
+          description: 'Razão do ban'
+          required: true
+          schema:
+            type: string
+        -
+          name: time
+          in: query
+          description: 'Duração do ban'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/bans/{id}/revoke':
+    get:
+      tags:
+        - bans
+      summary: 'Lista todos os bans até o momento'
+      operationId: GetBanList
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID do usuário'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /languages:
+    get:
+      tags:
+        - languages
+      summary: 'Lista todas as linguagens de programação no projeto'
+      operationId: GetLanguages
+      responses:
+        '200':
+          description: ...
+  '/languages/{id}':
+    get:
+      tags:
+        - languages
+      summary: 'Lista todas as linguagens de programação no projeto'
+      operationId: GetLanguages
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID da linguagem'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
   '/users/{discord_id}/levelup':
     post:
       tags:
         - users
-      summary: 'Mostra as informações de um usuário'
-      operationId: GetUser
+      summary: 'Dá exp para um usuário'
+      operationId: PostUserXp
       parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
         -
           name: discord_id
           in: path
           description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /ranking:
+    get:
+      tags:
+        - ranking
+      summary: 'Lista o raking de usuários'
+      operationId: GetRanking
+      parameters:
+        -
+          name: reputation
+          in: query
+          description: 'Ordenar por reputation (0 - False, 1 - True)'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  '/store/{product_id}':
+    post:
+      tags:
+        - store
+      summary: 'Realiza a compra de um produto'
+      operationId: PostStore
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: product_id
+          in: path
+          description: 'ID do produto'
+          required: true
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: query
+          description: 'ID do usuário do DIscord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /tips/development:
+    get:
+      tags:
+        - tips
+      summary: 'Lista todas as dicas armazenadas de desenvolvimento'
+      operationId: GetDevelopmentTips
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - tips
+      summary: 'Cria uma nova dica para o estudo de programação'
+      operationId: StoreDevelopmentTip
+      parameters:
+        -
+          name: tip
+          in: query
+          description: 'Dica que vai rolar'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/tips/development/{id}':
+    delete:
+      tags:
+        - tips
+      summary: 'Deleta uma dica de desenvolvimento'
+      operationId: DeleteDevelopmentTip
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID da dica'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  /tips/english:
+    get:
+      tags:
+        - tips
+      summary: 'Lista todas as dicas armazenadas de inglês'
+      operationId: GetEnglishTips
+      responses:
+        '200':
+          description: ...
+    post:
+      tags:
+        - tips
+      summary: 'Cria uma nova dica para o estudo de inglês'
+      operationId: StoreEnglishTop
+      parameters:
+        -
+          name: tip
+          in: query
+          description: 'Dica que vai rolar'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/tips/english/{id}':
+    delete:
+      tags:
+        - tips
+      summary: 'Deleta uma dica de desenvolvimento'
+      operationId: DeleteEnglishTip
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID da dica'
           required: true
           schema:
             type: string
@@ -85,6 +652,28 @@ paths:
         - users
       summary: 'Lista todos os usuários'
       operationId: GetUsers
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: date
+          in: query
+          description: 'Data para filtrar'
+          required: false
+          schema:
+            type: string
+        -
+          name: twitch
+          in: query
+          description: 'Nick da Twitch'
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: ...
@@ -94,6 +683,13 @@ paths:
       summary: 'Cria um novo usuário'
       operationId: StoreUser
       parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
         -
           name: discord_id
           in: query
@@ -111,6 +707,255 @@ paths:
       summary: 'Mostra as informações de um usuário'
       operationId: GetUser
       parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    put:
+      tags:
+        - users
+      summary: 'Altera um usuário'
+      operationId: StoreUser
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: name
+          in: query
+          description: 'Nome da pessoa'
+          required: false
+          schema:
+            type: string
+        -
+          name: nickname
+          in: query
+          description: 'Apelido da pessoa'
+          required: false
+          schema:
+            type: string
+        -
+          name: git
+          in: query
+          description: 'Link do git'
+          required: false
+          schema:
+            type: string
+        -
+          name: language
+          in: query
+          description: 'Linguagem em formato ''Locale'''
+          required: false
+          schema:
+            type: string
+        -
+          name: about
+          in: query
+          description: 'Informações pessoais do usuário'
+          required: false
+          schema:
+            type: string
+        -
+          name: twitch
+          in: query
+          description: 'Nickname da twitch do usuário'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+    delete:
+      tags:
+        - users
+      summary: 'Apaga um usuário'
+      operationId: DeleteUser
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/daily':
+    post:
+      tags:
+        - users
+      summary: 'Gerador de hCoins diário'
+      operationId: Coins
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/money/add':
+    post:
+      tags:
+        - users
+        - coins
+      summary: 'Adiciona hCoins para um usuário'
+      operationId: AddCoin
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: value
+          in: query
+          description: 'Valor de hCoins que vai ser adicionado'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/money/reduce':
+    post:
+      tags:
+        - users
+        - coins
+      summary: 'Subtrai hCoins de um usuário'
+      operationId: ReduceCoin
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: value
+          in: query
+          description: 'Valor de hCoins que vai ser subtraído'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/coupon':
+    post:
+      tags:
+        - users
+        - coupons
+      summary: 'Utiliza um cupom para um usuário'
+      operationId: Coupon
+      parameters:
+        -
+          name: discord_id
+          in: path
+          description: 'ID do usuário do Discord'
+          required: true
+          schema:
+            type: string
+        -
+          name: coupon
+          in: query
+          description: 'Cupom que vai ser utilizado'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/reputation':
+    post:
+      tags:
+        - users
+      summary: 'Adiciona reputation para um usuário'
+      operationId: Reputation
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
+        -
+          name: discord_id
+          in: path
+          description: 'ID do Discord do usuário que está enviando a reputation'
+          required: true
+          schema:
+            type: string
+        -
+          name: receive_id
+          in: query
+          description: 'ID do Discord do usuário que está recebendo a reputation'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ...
+  '/users/{discord_id}/products':
+    get:
+      tags:
+        - users
+      summary: 'Lista todos os produtos comprados pelo usuário'
+      operationId: GetUserProducts
+      parameters:
+        -
+          name: Api-key
+          in: header
+          description: 'Api Key'
+          required: false
+          schema:
+            type: string
         -
           name: discord_id
           in: path
