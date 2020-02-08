@@ -618,4 +618,46 @@ class UsersController extends Controller
 
         return $this->success();
     }
+
+    /**
+     * @OA\Get(
+     *     path="/users/{discord_id}/products",
+     *     summary="Lista todos os produtos comprados pelo usuário",
+     *     operationId="GetUserProducts",
+     *     tags={"users"},
+     *     @OA\Parameter(
+     *         name="Api-key",
+     *         in="header",
+     *         description="Api Key",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="discord_id",
+     *         in="path",
+     *         description="ID do usuário do Discord",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="...",
+     *     )
+     * )
+     */
+    public function getProducts(Request $request, $discordId)
+    {
+        $request->merge(['discord_id' => $discordId]);
+        $this->validate($request, [
+            'discord_id' => 'exists:users'
+        ]);
+
+        $user = User::where('discord_id', '=', $discordId)->first();
+
+        return $this->success($user->products()->get());
+    }
 }

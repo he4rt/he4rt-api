@@ -15,6 +15,8 @@ $router->get('/', function () use ($router) {
     return response("Servidor online!");
 });
 
+$router->get('/test','Helpers\\TestController@testFunction');
+
 $router->group(['middleware' => 'api_key'], function($router){
     $router->post('auth/login','AuthController@loginPortal');
     $router->post('admin/auth/login','AuthController@loginAdmin');
@@ -33,6 +35,7 @@ $router->group(['middleware' => 'api_key'], function($router){
     $router->post('users/{discord_id}/money/reduce', 'Users\\UsersController@reduceMoney');
     $router->post('users/{discord_id}/coupon', 'Users\\UsersController@coupon');
     $router->post('users/{discord_id}/reputation', 'Users\\UsersController@reputation');
+    $router->get('users/{discord_id}/products', 'Users\\UsersController@getProducts');
     $router->delete('users/{discord_id}', 'Users\\UsersController@destroy');
 
     $router->get('ranking','Levelup\\RankingController@index');
@@ -54,4 +57,18 @@ $router->group(['middleware' => 'api_key'], function($router){
     $router->put('bans/{id}/revoke','Helpers\\BanController@update');
 
     $router->post('coupons', 'Coupon\\CouponController@store');
+
+    $router->get('categories', 'Category\\CategoryController@index');
+    $router->post('categories', 'Category\\CategoryController@store');
+    $router->get('categories/{id}', 'Category\\CategoryController@show');
+    $router->put('categories/{id}', 'Category\\CategoryController@update');
+    $router->delete('categories/{id}', 'Category\\CategoryController@destroy');
+
+    $router->get('products', 'Category\\Product\\ProductController@index');
+    $router->post('products', 'Category\\Product\\ProductController@store');
+    $router->get('products/{id}', 'Category\\Product\\ProductController@show');
+    $router->put('products/{id}', 'Category\\Product\\ProductController@update');
+    $router->delete('products/{id}', 'Category\\Product\\ProductController@destroy');
+
+    $router->post('store/{productId}', 'Store\\StoreController@store');
 });

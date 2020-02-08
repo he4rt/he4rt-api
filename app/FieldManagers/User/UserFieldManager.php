@@ -9,7 +9,7 @@
 namespace App\FieldManagers\User;
 
 
-use App\FieldManager\FieldManager;
+use App\FieldManagers\FieldManager;
 
 class UserFieldManager extends FieldManager
 {
