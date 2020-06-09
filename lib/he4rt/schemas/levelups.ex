@@ -1,4 +1,4 @@
-defmodule He4rt.Schemas.LeveUp do
+defmodule He4rt.Schemas.LevelUp do
   @moduledoc """
   Schema definition for `levelup` table
   """
