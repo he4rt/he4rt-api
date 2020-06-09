@@ -37,6 +37,6 @@ defmodule He4rt.Schemas.LeveUp do
   @doc false
   def changeset(%__MODULE__{} = schema, attrs) when is_map(attrs) do
     schema
-    |> cast(attrs, ~w(name required_exp))
+    |> cast(attrs, ~w(name required_exp)a)
   end
 end
