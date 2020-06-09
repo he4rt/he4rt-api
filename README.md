@@ -19,7 +19,7 @@ $ mix deps.get
 Defina as variáveis de ambiente antes de executar o projeto
 
 ```bash
-$ export REDIS_URL="redis://localhost:6379/2"
+$ export REDIS_URL="redis://localhost:6379"
 $ export MIX_ENV="dev"
 $ export DATABASE_URL="ecto://root@localhost/he4rt"
 ```
@@ -30,6 +30,28 @@ Após a instalação de todas as dependências e configuração das variáveis d
 
 ```bash
 $ iex -S mix
+```
+
+## 💃🏻 Rodando os testes
+
+Caso você configure o `MIX_ENV=test` para definir o ambiente de testes, você precisará rodar novamente o comando para instalar as dependências para instalar as dependências necessárias para rodas os testes:
+
+```bash
+# Trocar a ENV da aplicação
+$ export MIX_ENV="test"
+$ export DATABASE_URL="ecto://root@localhost/test"
+
+# Instalar as dependências
+$ mix deps.get
+
+# Rodar os seeds
+$ mix setup
+
+# Rodar os testes
+$ mix test --trace
+
+# Ou, caso queira rodar o modo TDD, execute:
+$ mix test.watch --trace
 ```
 
 ## 👥 Contribuidores
