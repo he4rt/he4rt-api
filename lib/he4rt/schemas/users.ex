@@ -71,7 +71,7 @@ defmodule He4rt.Schemas.User do
     |> cast(attrs, ~w(
       discord_id name nickname twitch git about
       language level current_exp money daily current_exp
-    ))
+    )a)
     |> validate_inclusion(:language, @languages)
     |> validate_number(:level, greater_than_or_equal_to: 1)
     |> validate_number(:current_exp, greater_than_or_equal_to: 0)
