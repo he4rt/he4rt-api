@@ -34,7 +34,9 @@ defmodule He4rt.MixProject do
     {:plug_cowboy, "~> 2.0"},
 
     # Database
+    {:myxql, "~> 0.3.0"},
     {:ecto, "~> 3.1"},
+    {:ecto_sql, "~> 3.1"},
     {:redix, "~> 0.10.4"},
 
     # Compiler
