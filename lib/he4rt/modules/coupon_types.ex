@@ -9,7 +9,7 @@ defmodule He4rt.Modules.CouponTypes do
   alias He4rt.Repo
   alias He4rt.Schemas.CouponType
 
-  @preload [:type]
+  @preload []
 
   @doc """
   Retrieve one coupon type by ID
