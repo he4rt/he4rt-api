@@ -6,7 +6,7 @@
 
 # He4rt API
 
-Se você nunca mexeu com Elixir, você pode visitar nosso repositório com os conceitos básicos de Elixir: [Clique aqui ➡️](https://github.com/aleDsz/elixir4noobs)
+Se você nunca mexeu com Elixir, você pode visitar nosso repositório com os conceitos básicos de Elixir: [Clique aqui ⬅️](https://github.com/aleDsz/elixir4noobs)
 
 ## 📥 Instalando dependências
 
