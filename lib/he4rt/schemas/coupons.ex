@@ -13,6 +13,7 @@ defmodule He4rt.Schemas.Coupon do
   @type t :: %__MODULE__{
     id: pos_integer(), 
     name: String.t,
+    value: pos_integer(),
     used: boolean(),
     type: CouponType.t,
     type_id: pos_integer(),
@@ -26,6 +27,7 @@ defmodule He4rt.Schemas.Coupon do
     id
     name
     value
+    used
     type
     user
     created_at
@@ -50,7 +52,7 @@ defmodule He4rt.Schemas.Coupon do
   def changeset(%__MODULE__{} = schema, attrs) when is_map(attrs) do
     schema
     |> cast(attrs, ~w(name value used type_id user_id)a)
-    |> validate_required(~w(name value))
+    |> validate_required(~w(name value)a)
     |> foreign_key_constraint(:type_id)
     |> foreign_key_constraint(:user_id)
   end
