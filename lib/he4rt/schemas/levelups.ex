@@ -11,17 +11,13 @@ defmodule He4rt.Schemas.LevelUp do
   @type t :: %__MODULE__{
     id: pos_integer(), 
     name: String.t,
-    required_exp: pos_integer(),
-    created_at: DateTime.t,
-    updated_at: DateTime.t
+    required_exp: pos_integer()
   }
 
   @fields ~w(
     id
     name
     required_exp
-    created_at
-    updated_at
   )a
 
   @primary_key {:id, :id, autogenerate: true}
@@ -30,8 +26,6 @@ defmodule He4rt.Schemas.LevelUp do
   schema "levelup" do
     field :name, :string
     field :required_exp, :integer
-
-    timestamps(inserted_at: :created_at)
   end
 
   @doc false
