@@ -34,7 +34,7 @@ $ iex -S mix
 
 ## 💃🏻 Rodando os testes
 
-Caso você configure o `MIX_ENV=test` para definir o ambiente de testes, você precisará rodar novamente o comando para instalar as dependências para instalar as dependências necessárias para rodas os testes:
+Caso você configure o `MIX_ENV=test` para definir o ambiente de testes, você precisará rodar novamente o comando para instalar as dependências necessárias para rodas os testes:
 
 ```bash
 # Trocar a ENV da aplicação
