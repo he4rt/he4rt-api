@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://heartdevs.com">
-		<img src="https://heartdevs.com/dist/images/logo-he4rt2.png" alt="He4rt Devs">
+		<img src="https://heartdevs.com/dist/images/logo-he4rt2.png" alt="He4rt Devs" width="100%">
   </a>
 </p>
 
