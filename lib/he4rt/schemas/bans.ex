@@ -49,7 +49,7 @@ defmodule He4rt.Schemas.Ban do
   @doc false
   def changeset(%__MODULE__{} = schema, attrs) when is_map(attrs) do
     schema
-    |> cast(attrs, ~w(admin_id victim_id type reason time revoked))
-    |> validate_required(~w(admin_id victim_id type reason))
+    |> cast(attrs, ~w(admin_id victim_id type reason time revoked)a)
+    |> validate_required(~w(admin_id victim_id type reason)a)
   end
 end
