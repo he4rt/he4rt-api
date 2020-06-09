@@ -25,7 +25,7 @@ defmodule He4rt.Schemas.CouponType do
   @primary_key {:id, :id, autogenerate: true}
   @derive {Poison.Encoder, only: @fields}
 
-  schema "coupoun_types" do
+  schema "coupon_types" do
     field :name, :string
 
     timestamps(inserted_at: :created_at)
