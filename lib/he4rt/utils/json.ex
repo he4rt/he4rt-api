@@ -27,12 +27,29 @@ defmodule He4rt.Utils.JSON do
   end
   def serialize(data), do: data
 
-  @spec data_serialization(Map.t()) :: Map.t()
+  @spec data_serialization(map()) :: map()
   defp data_serialization(%{__meta__: _meta} = schema) do
     schema
+    |> Map.from_struct()
+    |> Map.delete(:__meta__)
+    |> Enum.map(&data_serialization/1)
+    |> Enum.into(%{})
     |> Poison.encode!()
     |> Poison.decode!()
   end
+  defp data_serialization({key, %{__meta__: _meta} = schema}) do
+    schema =
+      schema
+      |> Map.from_struct()
+      |> Map.delete(:__meta__)
+      |> Enum.map(&data_serialization/1)
+      |> Enum.into(%{})
+      |> Poison.encode!()
+      |> Poison.decode!()
+
+    {key, schema}
+  end
+  defp data_serialization({key, %{__struct__: Decimal} = val}), do: {key, val |> Decimal.to_float()}
   defp data_serialization({key, %{__struct__: struct} = val}) when struct in @exceptions, do: {key, val |> to_string()}
   defp data_serialization({key, val}) when is_map(val) or is_list(val), do: {key, serialize(val)}
   defp data_serialization(map), do: map
