@@ -114,4 +114,15 @@ defmodule He4rt.Modules.Categories do
       end
     end
   end
+
+  @doc """
+  Remove existent category
+  """
+  @spec remove(category_id :: pos_integer()) :: {:ok, Category.t} | {:error, term}
+  def remove(category_id) when is_integer(category_id) do
+    with {:ok, category} <- get(category_id) do
+      category
+      |> Repo.delete()
+    end
+  end
 end
