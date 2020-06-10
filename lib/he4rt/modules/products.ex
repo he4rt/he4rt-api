@@ -114,6 +114,15 @@ defmodule He4rt.Modules.Products do
       end
     end
   end
+
+  @doc """
+  Remove existent product
+  """
+  @spec remove(product_id :: pos_integer()) :: {:ok, Product.t} | {:error, term}
+  def remove(product_id) when is_integer(product_id) do
+    with {:ok, product} <- get(product_id) do
+      product
+      |> Repo.delete()
     end
   end
 end
