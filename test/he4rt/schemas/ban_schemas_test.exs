@@ -1,7 +1,7 @@
 defmodule He4rt.Test.Schemas.Ban do
   use ExUnit.Case, async: false
 
-  @moduletag :users
+  @moduletag :bans
 
   alias He4rt.Schemas.Ban, as: Schema
 

@@ -1,7 +1,7 @@
 defmodule He4rt.Test.Schemas.Coupon do
   use ExUnit.Case, async: false
 
-  @moduletag :users
+  @moduletag :coupons
 
   alias He4rt.Schemas.Coupon, as: Schema
 
