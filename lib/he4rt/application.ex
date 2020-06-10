@@ -11,7 +11,6 @@ defmodule He4rt.Application do
 
   defp children(), do: [
     supervisor(He4rt.Repo, []),
-    worker(He4rt.Services.Redis, []),
     {Plug.Cowboy, scheme: :http, plug: He4rt.Endpoint, options: get_config()},
   ]
 
