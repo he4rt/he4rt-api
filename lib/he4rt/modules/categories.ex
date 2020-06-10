@@ -9,7 +9,7 @@ defmodule He4rt.Modules.Categories do
   alias He4rt.Repo
   alias He4rt.Schemas.Category
 
-  @preload [:type]
+  @preload []
 
   @doc """
   Retrieve one category by ID
