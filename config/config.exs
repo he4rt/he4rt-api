@@ -10,8 +10,9 @@ config :he4rt,
   ecto_repos: [He4rt.Repo],
   generators: [integer: true]
 
-# Configures Redis
-config :he4rt, He4rt.Services.Redis,
-  url: {:system, "REDIS_URL"}
+# Configures Authentications Plug
+config :he4rt, He4rt.Plugs.Authentications,
+  is_enabled?: {:system, "KEY_ENABLED"},
+  api_key: {:system, "API_KEY"}
 
 import_config "#{Mix.env()}.exs"
