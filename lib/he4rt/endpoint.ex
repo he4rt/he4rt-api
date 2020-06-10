@@ -1,4 +1,5 @@
 defmodule He4rt.Endpoint do
+  @moduledoc false
   use Plug.Builder
 
   plug Plug.RequestId
