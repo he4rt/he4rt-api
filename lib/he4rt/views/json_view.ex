@@ -1,4 +1,4 @@
-defmodule He4rt.Views.V1.JsonView do
+defmodule He4rt.Views.JsonView do
   @moduledoc """
   View dedicated to handle responses as JSON
   """

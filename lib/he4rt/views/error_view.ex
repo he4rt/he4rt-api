@@ -1,9 +1,9 @@
-defmodule He4rt.Views.V1.ErrorView do
+defmodule He4rt.Views.ErrorView do
   @moduledoc """
   View dedicated to handle error responses as JSON
   """
   use Plug.Builder
-  import He4rt.Views.V1.JsonView
+  import He4rt.Views.JsonView
 
   @error_regex ~r/\{(.*?)\}/
 
