@@ -9,7 +9,7 @@ defmodule He4rt.Modules.Products do
   alias He4rt.Repo
   alias He4rt.Schemas.Product
 
-  @preload []
+  @preload [:category]
 
   @doc """
   Retrieve one product by ID
@@ -79,6 +79,17 @@ defmodule He4rt.Modules.Products do
     %Product{}
     |> Product.changeset(attrs)
     |> Repo.insert()
+    |> case do
+      {:ok, product} ->
+        product =
+          product
+          |> Repo.preload(@preload)
+
+        {:ok, product}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 
   @doc """
@@ -90,6 +101,19 @@ defmodule He4rt.Modules.Products do
       product
       |> Product.changeset(attrs)
       |> Repo.update()
+      |> case do
+        {:ok, product} ->
+          product =
+            product
+            |> Repo.preload(@preload)
+
+          {:ok, product}
+
+        {:error, reason} ->
+          {:error, reason}
+      end
+    end
+  end
     end
   end
 end
