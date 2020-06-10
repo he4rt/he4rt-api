@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Logger
-config :logger, level: :info
+config :logger, level: :warn
 
 # Configures application
 config :he4rt, He4rt.Endpoint,
