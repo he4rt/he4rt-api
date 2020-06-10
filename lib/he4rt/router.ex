@@ -1,7 +1,7 @@
 defmodule He4rt.Router do
   @moduledoc false
   use Plug.Router
-  import He4rt.Views.V1.ErrorView
+  import He4rt.Views.ErrorView
 
   plug :match
   plug :dispatch
