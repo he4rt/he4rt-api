@@ -1,18 +1,5 @@
 defmodule He4rt do
   @moduledoc """
-  Documentation for He4rt.
+  Made with 💜 
   """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> He4rt.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end
