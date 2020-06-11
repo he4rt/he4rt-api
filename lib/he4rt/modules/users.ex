@@ -96,8 +96,8 @@ defmodule He4rt.Modules.Users do
   Update existent user
   """
   @spec update(attrs :: map()) :: {:ok, User.t} | {:error, term}
-  def update(%{"user_id" => user_id} = attrs) when is_integer(user_id) and is_map(attrs) do
-    with {:ok, user} <- get(user_id) do
+  def update(%{"discord_id" => discord_id} = attrs) when is_binary(discord_id) and is_map(attrs) do
+    with {:ok, user} <- get_from_discord_id(discord_id) do
       user
       |> User.changeset(attrs)
       |> Repo.update()
