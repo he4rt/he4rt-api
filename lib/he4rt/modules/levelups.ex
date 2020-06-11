@@ -32,6 +32,35 @@ defmodule He4rt.Modules.LevelUps do
   end
 
   @doc """
+  Check if can level up
+  """
+  def can_level_up?(current_level_up, current_exp) do
+    from(
+      m in LevelUp,
+      where: m.id >= ^current_level_up
+    )
+    |> Repo.one()
+    |> case do
+      nil ->
+        {:ok, %{id: current_level_up}}
+
+      _level_up ->
+        from(
+          m in LevelUp,
+          where: m.required_exp <= ^current_exp
+        )
+        |> Repo.one()
+        |> case do
+          nil ->
+            {:error, :not_found}
+
+          level_up ->
+            {:ok, level_up}
+        end
+    end
+  end
+
+  @doc """
   Retrieve one level up by name
   """
   @spec get_from_name(name :: String.t) :: {:ok, LevelUp.t} | {:error, term}
