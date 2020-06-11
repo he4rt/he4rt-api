@@ -9,7 +9,7 @@ defmodule He4rt.Modules.UserProducts do
   alias He4rt.Repo
   alias He4rt.Schemas.UserProduct
 
-  @preload [:user_id, :product_id]
+  @preload [:user, :product]
 
   @doc """
   Retrieve one user product by ID
