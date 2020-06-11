@@ -32,8 +32,8 @@ defmodule He4rt.Plugs.Params do
         params ->
           params
           |> Enum.map(fn
-            {key, value} when key in @reserved_keys and is_binary(value) ->
-              {key, value}
+            {key, value} when key in @reserved_keys ->
+              {key, value |> to_string()}
 
             {"id" = key, value} when is_binary(value) ->
               {key, value |> String.to_integer()}
