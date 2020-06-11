@@ -9,7 +9,7 @@ defmodule He4rt.Modules.Coupons do
   alias He4rt.Repo
   alias He4rt.Schemas.Coupon
 
-  @preload [:type]
+  @preload [:type, :user]
 
   @doc """
   Retrieve one coupon by ID
@@ -38,8 +38,10 @@ defmodule He4rt.Modules.Coupons do
   def get_from_name(name) when is_binary(name) do
     from(
       m in Coupon,
-      where: m.name == ^name,
-      preload: ^@preload
+      where: m.name == ^name and m.used == ^false,
+      preload: ^@preload,
+      order_by: [desc: m.created_at],
+      limit: 1
     )
     |> Repo.one()
     |> case do
