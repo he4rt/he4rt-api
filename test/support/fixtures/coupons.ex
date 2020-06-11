@@ -6,6 +6,18 @@ defmodule He4rt.Support.Fixtures.Coupons do
   alias He4rt.Support.Fixtures.Users
 
   @doc """
+  Create coupon parameters without user
+  """
+  @spec params(:user) :: map 
+  def params(:user),
+    do: %{
+      name: Faker.Commerce.product_name_product(),
+      value: Faker.random_between(1, 9_999_999),
+      used: false,
+      type_id: insert(:type) |> Map.get(:id),
+    }
+
+  @doc """
   Create coupon parameters
   """
   @spec params() :: map 
