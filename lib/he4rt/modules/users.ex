@@ -114,4 +114,15 @@ defmodule He4rt.Modules.Users do
       end
     end
   end
+
+  @doc """
+  Remove existent user
+  """
+  @spec remove(discord_id :: String.t) :: {:ok, User.t} | {:error, term}
+  def remove(discord_id) when is_integer(discord_id) do
+    with {:ok, user} <- get_from_discord_id(discord_id) do
+      user
+      |> Repo.delete()
+    end
+  end
 end

@@ -114,4 +114,15 @@ defmodule He4rt.Modules.DevelopmentTips do
       end
     end
   end
+
+  @doc """
+  Remove existent development tip
+  """
+  @spec remove(development_tip_id :: pos_integer()) :: {:ok, DevelopmentTip.t} | {:error, term}
+  def remove(development_tip_id) when is_integer(development_tip_id) do
+    with {:ok, development_tip} <- get(development_tip_id) do
+      development_tip
+      |> Repo.delete()
+    end
+  end
 end

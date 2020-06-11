@@ -114,4 +114,15 @@ defmodule He4rt.Modules.EnglishTips do
       end
     end
   end
+
+  @doc """
+  Remove existent english tip
+  """
+  @spec remove(english_tip_id :: pos_integer()) :: {:ok, EnglishTip.t} | {:error, term}
+  def remove(english_tip_id) when is_integer(english_tip_id) do
+    with {:ok, english_tip} <- get(english_tip_id) do
+      english_tip
+      |> Repo.delete()
+    end
+  end
 end
