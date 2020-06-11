@@ -72,6 +72,48 @@ defmodule He4rt.Modules.Users do
   end
 
   @doc """
+  Retrieve all users and order by reputation
+  """
+  @spec retrieve_ranking_by_reputation() :: {:ok, list(User.t)} | {:error, term}
+  def retrieve_ranking_by_reputation() do
+    from(
+      m in User,
+      preload: ^@preload,
+      order_by: [desc: m.reputation],
+      limit: 10
+    )
+    |> Repo.all()
+    |> case do
+      [] ->
+        {:error, :not_found}
+
+      users ->
+        {:ok, users}
+    end
+  end
+
+  @doc """
+  Retrieve all users and order by level
+  """
+  @spec retrieve_ranking_by_level() :: {:ok, list(User.t)} | {:error, term}
+  def retrieve_ranking_by_level() do
+    from(
+      m in User,
+      preload: ^@preload,
+      order_by: [desc: m.level],
+      limit: 10
+    )
+    |> Repo.all()
+    |> case do
+      [] ->
+        {:error, :not_found}
+
+      users ->
+        {:ok, users}
+    end
+  end
+
+  @doc """
   Create new user
   """
   @spec create(attrs :: map()) :: {:ok, User.t} | {:error, term}
